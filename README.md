@@ -59,12 +59,12 @@ The analytics module takes this a step further by feeding the visualized data to
 
 <p align="center">
   <img src="./Preview/empyra_analytics2.jpg" alt="Analytics View 2" width="700"/><br/>
-  <em>Figure 5: Analytics Dashboard - Department Metrics</em>
+  <em>Figure 5: Analytics Dashboard - Employee/Department Metrics</em>
 </p>
 
 <p align="center">
   <img src="./Preview/empyra_analytics3.jpg" alt="Analytics View 3" width="700"/><br/>
-  <em>Figure 6: Analytics Dashboard - Geographical Distribution</em>
+  <em>Figure 6: Analytics Dashboard - AI Insight</em>
 </p>
 
 ### Additional Features
