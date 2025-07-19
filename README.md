@@ -34,7 +34,7 @@ The analytics module takes this a step further by feeding the visualized data to
 
 ## Preview
 
-### Employee Management
+
 <p align="center">
   <img src="./Preview/empyra_employeelist.jpg" alt="Employee List" width="700"/><br/>
   <em>Figure 1: Employee List View</em>
@@ -45,13 +45,13 @@ The analytics module takes this a step further by feeding the visualized data to
   <em>Figure 2: Employee Creation Form</em>
 </p>
 
-### Department Management
+
 <p align="center">
   <img src="./Preview/empyra_department.jpg" alt="Department View" width="700"/><br/>
   <em>Figure 3: Department Management</em>
 </p>
 
-### Analytics Dashboard
+
 <p align="center">
   <img src="./Preview/empyra_analytics1.jpg" alt="Analytics View 1" width="700"/><br/>
   <em>Figure 4: Analytics Dashboard - Overview</em>
@@ -67,7 +67,6 @@ The analytics module takes this a step further by feeding the visualized data to
   <em>Figure 6: Analytics Dashboard - AI Insight</em>
 </p>
 
-### Additional Features
 <p align="center">
   <img src="./Preview/empyra_hobbies.jpg" alt="Hobbies Management" width="700"/><br/>
   <em>Figure 7: Employee Hobbies Management</em>
