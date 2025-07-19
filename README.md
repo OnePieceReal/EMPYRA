@@ -9,13 +9,10 @@
 - [Features](#features)
 - [Preview](#preview)
 - [Setup Guide](#setup-guide)
-- [Technologies Used](#technologies-used)
-- [API Documentation](#api-documentation)
-- [License](#license)
 
 ## Project Overview
 
-EMPYRA is a comprehensive Employee Management System built with Angular for the frontend and Spring Boot for the backend. The system leverages REST APIs to facilitate seamless communication between the frontend and backend components, with API documentation automatically generated using SwaggerUI.
+EMPYRA is a comprehensive Employee Management System built with Angular (using Material UI) for the frontend and Spring Boot for the backend, with MySQL as the database. The system leverages REST APIs to facilitate seamless communication between the frontend and backend components, with API documentation automatically generated using SwaggerUI.
 
 To enhance user experience during employee data entry, EMPYRA integrates with the Restful Countries API, providing intelligent suggestions for country-related fields. The system also features advanced data visualization capabilities powered by Chart.js, presenting key metrics such as employee joining trends over time, department-wise average age and ratings, and geographical distribution of employees across cities, states, and countries.
 
@@ -23,11 +20,13 @@ The analytics module takes this a step further by feeding the visualized data to
 
 ## Demo
 
-[Live Demo](#) *(Add your live demo link here when available)*
+
+
+https://github.com/user-attachments/assets/07a2af0f-962c-49a8-91d5-20abc10bd39e
+
 
 ## Features
 
-- **Comprehensive Employee Management**: Create, read, update, and delete employee records
 - **Intelligent Data Entry**: Country suggestions powered by Restful Countries API
 - **Advanced Analytics**: 
   - Visualizations of employee demographics and performance metrics
@@ -35,11 +34,31 @@ The analytics module takes this a step further by feeding the visualized data to
 - **Responsive Dashboard**: Interactive charts and data visualizations
 - **Secure API Integration**: Robust Spring Boot backend with documented REST endpoints
 
-## Preview
 
-*(Add screenshots of your application here)*
-![Dashboard Preview](https://via.placeholder.com/600x400?text=Dashboard+Preview)
-![Employee Management Preview](https://via.placeholder.com/600x400?text=Employee+Management)
+### Employee Management
+![Employee List](./Preview/empyra_employeelist.jpg)
+*Figure 1: Employee List View*
+
+![Add Employee](./Preview/empyra_addemployee.jpg)
+*Figure 2: Employee Creation Form*
+
+### Department Management
+![Department View](./Preview/empyra_department.jpg)
+*Figure 3: Department Management*
+
+### Analytics Dashboard
+![Analytics View 1](./Preview/empyra_analytics1.jpg)
+*Figure 4: Analytics Dashboard - Overview*
+
+![Analytics View 2](./Preview/empyra_analytics2.jpg)
+*Figure 5: Analytics Dashboard - Department Metrics*
+
+![Analytics View 3](./Preview/empyra_analytics3.jpg)
+*Figure 6: Analytics Dashboard - Geographical Distribution*
+
+### Additional Features
+![Hobbies Management](./Preview/empyra_hobbies.jpg)
+*Figure 7: Employee Hobbies Management*
 
 ## Setup Guide
 
@@ -50,7 +69,7 @@ To set up EMPYRA locally, follow these steps:
 - Angular CLI
 - Java JDK (v11 or later)
 - Maven
-- MySQL or your preferred database
+- MySQL
 
 ### Backend Setup
 ```bash
@@ -63,10 +82,26 @@ cd empyra/backend
 # Install dependencies
 mvn install
 
-# Configure your database settings in application.properties
+# Configure MySQL in application.properties
 # spring.datasource.url=jdbc:mysql://localhost:3306/empyra
 # spring.datasource.username=yourusername
 # spring.datasource.password=yourpassword
 
 # Run the Spring Boot application
 mvn spring-boot:run
+```
+### Frontend Setup
+# Navigate to frontend directory
+cd ../frontend
+
+# Install dependencies
+npm install
+
+# Configure API base URL in environment.ts
+# export const environment = {
+#   production: false,
+#   apiUrl: 'http://localhost:8080/api'
+# };
+
+# Run the Angular development server
+ng serve
