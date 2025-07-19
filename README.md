@@ -98,4 +98,31 @@ cd EMPYRA/backend
 
 # Install dependencies
 mvn install
+
+#Edit  SpringBoot-Backend\src\main\resources\application.properties and configure your MySQL database:
+spring.datasource.url=jdbc:mysql://localhost:3306/yourDatabaseName?autoReconnect=TRUE&useSSL=FALSE
+spring.datasource.username=yourUsername
+spring.datasource.password=yourPassword
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.format_sql=true
+
+#Run backend
+mvn spring-boot:run
 ```
+### 🔧 Frontend Setup (Angular)
+```bash
+# Navigate to the frontend directory
+cd ../Angular-Frontend
+
+# Install dependencies
+npm install
+
+#In src/app/services/ai-insights.service.ts, replace the API key:
+export class AiInsightsService {
+  private readonly openRouterApiUrl = 'https://openrouter.ai/api/v1/chat/completions';
+  private readonly apiKey = 'use your own api key';
+}
+
+#Now run the frontend development server:
+ng serve
