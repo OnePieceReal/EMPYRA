@@ -69,7 +69,7 @@ The analytics module takes this a step further by feeding the visualized data to
 
 <p align="center">
   <img src="./Preview/empyra_hobbies.jpg" alt="Hobbies Management" width="700"/><br/>
-  <em>Figure 7: Employee Hobbies Management</em>
+  <em>Figure 7: Hobby Management</em>
 </p>
 
 ## Setup Guide
