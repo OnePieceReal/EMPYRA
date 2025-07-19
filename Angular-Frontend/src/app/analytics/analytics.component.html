@@ -1,0 +1,255 @@
+<div class="analytics-container" [@fadeIn]>
+  <!-- Header Section -->
+  <div class="page-header" [@slideInUp]>
+    <div class="header-content">
+      <div class="header-left">
+        <h1 class="page-title">
+          <mat-icon class="title-icon">analytics</mat-icon>
+          Employee Analytics Dashboard
+        </h1>
+        <p class="page-subtitle">Comprehensive insights into your employee data</p>
+      </div>
+      <div class="header-right">
+        <button mat-raised-button color="primary" (click)="loadData()" [disabled]="loading">
+          <mat-icon>refresh</mat-icon>
+          {{ loading ? 'Refreshing...' : 'Refresh Data' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading" [@fadeIn]>
+    <mat-spinner diameter="60"></mat-spinner>
+    <p>Loading analytics data...</p>
+  </div>
+
+  <!-- Analytics Content -->
+  <div class="analytics-content" *ngIf="!loading" [@fadeIn]>
+    <!-- Employee Statistics Section Title -->
+    <h2 class="section-title">
+      <mat-icon>insights</mat-icon>
+      Employee Statistics
+    </h2>
+    <!-- Summary Cards -->
+    <div class="summary-cards" [@slideInUp]>
+      <div class="summary-card">
+        <div class="card-icon">
+          <mat-icon>people</mat-icon>
+        </div>
+        <div class="card-content">
+          <h3 class="card-value">{{ getTotalEmployees() }}</h3>
+          <p class="card-label">Total Employees</p>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-icon">
+          <mat-icon>attach_money</mat-icon>
+        </div>
+        <div class="card-content">
+          <h3 class="card-value">{{ formatAverageSalary(averageSalary) }}</h3>
+          <p class="card-label">Average Salary</p>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-icon">
+          <mat-icon>star</mat-icon>
+        </div>
+        <div class="card-content">
+          <h3 class="card-value">{{ averageRating | number:'1.1-1' }}</h3>
+          <p class="card-label">Average Rating</p>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-icon">
+          <mat-icon>cake</mat-icon>
+        </div>
+        <div class="card-content">
+          <h3 class="card-value">{{ averageAge | number:'1.0-0' }}</h3>
+          <p class="card-label">Average Age</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Most Popular Items -->
+    <div class="popular-items" [@slideInUp]>
+      <h2 class="section-title">
+        <mat-icon>trending_up</mat-icon>
+        Most Popular Items
+      </h2>
+      <div class="popular-grid">
+        <div class="popular-card">
+          <mat-icon class="popular-icon">sports_esports</mat-icon>
+          <h4>Most Popular Hobby</h4>
+          <p class="popular-value">{{ mostPopularHobby }}</p>
+        </div>
+        <div class="popular-card">
+          <mat-icon class="popular-icon">business</mat-icon>
+          <h4>Most Popular Department</h4>
+          <p class="popular-value">{{ mostPopularDepartment }}</p>
+        </div>
+        <div class="popular-card">
+          <mat-icon class="popular-icon">location_on</mat-icon>
+          <h4>Most Popular State</h4>
+          <p class="popular-value">{{ mostPopularState }}</p>
+        </div>
+        <div class="popular-card">
+          <mat-icon class="popular-icon">location_city</mat-icon>
+          <h4>Most Popular City</h4>
+          <p class="popular-value">{{ mostPopularCity }}</p>
+        </div>
+        <div class="popular-card">
+          <mat-icon class="popular-icon">public</mat-icon>
+          <h4>Most Popular Country</h4>
+          <p class="popular-value">{{ mostPopularCountry }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="charts-grid">
+      <!-- Employee Growth Chart -->
+      <div class="chart-card full-width" [@slideInUp]>
+        <div class="chart-container">
+          <canvas id="joinDateChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Department-based Bar Charts -->
+      <div class="chart-card" [@slideInUp]>
+        <div class="chart-container">
+          <canvas id="ageByDepartmentChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card" [@slideInUp]>
+        <div class="chart-container">
+          <canvas id="ratingByDepartmentChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card" [@slideInUp]>
+        <div class="chart-container">
+          <canvas id="salaryByDepartmentChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Geographic Distribution Pie Charts -->
+      <div class="chart-card" [@slideInUp]>
+        <div class="chart-container">
+          <canvas id="cityByDepartmentChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card" [@slideInUp]>
+        <div class="chart-container">
+          <canvas id="countryByDepartmentChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card" [@slideInUp]>
+        <div class="chart-container">
+          <canvas id="stateByDepartmentChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI-Powered Insights -->
+    <div class="insights-section" [@slideInUp]>
+      <div class="insights-header">
+        <h2 class="insights-title">
+          <mat-icon>psychology</mat-icon>
+          AI-Powered Insights
+        </h2>
+        <button mat-raised-button color="primary" (click)="generateAiInsights()" [disabled]="generatingInsights">
+          <mat-icon>{{ generatingInsights ? 'hourglass_empty' : 'psychology' }}</mat-icon>
+          {{ generatingInsights ? 'Generating...' : 'Generate Insight' }}
+        </button>
+      </div>
+
+      <!-- Loading State for AI Insights -->
+      <div class="ai-loading" *ngIf="generatingInsights">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Analyzing your data with AI...</p>
+      </div>
+
+      <!-- AI Insights Content -->
+      <div class="ai-insights-content" *ngIf="aiInsights && !generatingInsights">
+        <!-- Key Insights -->
+        <div class="insight-category">
+          <h3 class="category-title">
+            <mat-icon>lightbulb</mat-icon>
+            Key Insights
+          </h3>
+          <div class="insight-list">
+            <div class="insight-item" *ngFor="let insight of aiInsights.insights">
+              <mat-icon class="insight-bullet">fiber_manual_record</mat-icon>
+              <span>{{ insight }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="insight-category">
+          <h3 class="category-title">
+            <mat-icon>recommend</mat-icon>
+            Recommendations
+          </h3>
+          <div class="insight-list">
+            <div class="insight-item" *ngFor="let recommendation of aiInsights.recommendations">
+              <mat-icon class="insight-bullet">fiber_manual_record</mat-icon>
+              <span>{{ recommendation }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trends -->
+        <div class="insight-category">
+          <h3 class="category-title">
+            <mat-icon>trending_up</mat-icon>
+            Emerging Trends
+          </h3>
+          <div class="insight-list">
+            <div class="insight-item" *ngFor="let trend of aiInsights.trends">
+              <mat-icon class="insight-bullet">fiber_manual_record</mat-icon>
+              <span>{{ trend }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Risks and Opportunities -->
+        <div class="insight-row">
+          <div class="insight-category half-width">
+            <h3 class="category-title risk">
+              <mat-icon>warning</mat-icon>
+              Potential Risks
+            </h3>
+            <div class="insight-list">
+              <div class="insight-item" *ngFor="let risk of aiInsights.risks">
+                <mat-icon class="insight-bullet risk">fiber_manual_record</mat-icon>
+                <span>{{ risk }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="insight-category half-width">
+            <h3 class="category-title opportunity">
+              <mat-icon>rocket_launch</mat-icon>
+              Opportunities
+            </h3>
+            <div class="insight-list">
+              <div class="insight-item" *ngFor="let opportunity of aiInsights.opportunities">
+                <mat-icon class="insight-bullet opportunity">fiber_manual_record</mat-icon>
+                <span>{{ opportunity }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Do not show fallback or empty state -->
+    </div>
+  </div>
+</div> 

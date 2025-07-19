@@ -1,0 +1,444 @@
+body, .department-management-container {
+  background: #f7f8fa;
+}
+
+.department-management-container {
+  padding: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Header Section */
+.page-header {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  width: 100%;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.header-title h1 {
+  margin: 0 0 8px 0;
+  color: #2c3e50;
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-title p {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+/* Search Section */
+.search-section {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.search-section.left-align {
+  margin-left: 0;
+  width: 100%;
+}
+
+.search-field {
+  max-width: 500px;
+  width: 100%;
+}
+
+.search-field ::ng-deep .mat-form-field-outline {
+  border-radius: 12px;
+}
+
+/* Remove old header styles */
+.header-section, .header-background { display: none !important; }
+
+/* Keep the rest of the previous styles for accordion, table, etc. */
+.department-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.department-panel {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+}
+
+.department-panel ::ng-deep .mat-expansion-panel-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px 24px;
+  border-radius: 12px 12px 0 0;
+  transition: background 0.2s;
+}
+
+/* Remove all custom hover styles and prevent white overlay */
+.department-panel ::ng-deep .mat-expansion-panel-header:hover,
+.department-panel ::ng-deep .mat-expansion-panel-header.mat-expanded,
+.department-panel ::ng-deep .mat-expansion-panel-header:focus,
+.department-panel ::ng-deep .mat-expansion-panel-header:active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.department-panel ::ng-deep .mat-expansion-panel-header:hover .mat-expansion-panel-header-title,
+.department-panel ::ng-deep .mat-expansion-panel-header:hover .mat-expansion-panel-header-description {
+  text-shadow: none;
+  font-weight: 700;
+}
+
+.department-panel ::ng-deep .mat-expansion-panel-header-title {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.department-panel ::ng-deep .mat-expansion-panel-header-description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+
+.department-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.department-id {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: center;
+}
+
+.department-name {
+  font-weight: 500;
+}
+
+.department-content {
+  padding: 24px;
+  background: white;
+}
+
+.department-info-section {
+  margin-bottom: 24px;
+}
+
+.department-info-section h4 {
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #667eea;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.info-item {
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.info-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.info-item strong {
+  color: #495057;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.employees-section {
+  margin-bottom: 24px;
+}
+
+.employees-section h4 {
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #667eea;
+}
+
+.employee-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 16px;
+}
+
+.employee-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e9ecef;
+  color: #333;
+}
+
+.employee-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.employee-table .mat-column-actions {
+  width: 80px;
+  text-align: center;
+}
+
+.no-employees {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  font-style: italic;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.department-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 16px;
+  border-top: 1px solid #e9ecef;
+}
+
+.action-btn {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  min-width: 140px;
+  height: 40px;
+  border: none;
+  font-size: 0.9rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.action-btn mat-icon {
+  margin-right: 6px;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 20px;
+}
+
+.loading-state span {
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+  color: #6c757d;
+  text-align: center;
+}
+
+.no-results mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+}
+
+.no-results span {
+  font-size: 1.1rem;
+}
+
+.fab-add {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.add-button {
+  height: 48px;
+  padding: 0 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.18);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.25);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+.add-button mat-icon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.add-employee-section {
+  margin: 32px 0 16px 0;
+  padding: 20px 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.07);
+}
+
+.add-employee-section h4 {
+  margin: 0 0 16px 0;
+  color: #667eea;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.add-by-id-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.add-employee-id-field {
+  width: 180px;
+}
+
+.add-by-search-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add-employee-search-field {
+  width: 100%;
+  max-width: 350px;
+}
+
+.employee-search-results {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.employee-search-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.06);
+  font-size: 1rem;
+}
+
+.employee-search-result button {
+  margin-left: 16px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .department-management-container {
+    padding: 16px;
+  }
+  .page-header {
+    padding: 24px;
+  }
+  .header-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .header-title h1 {
+    font-size: 28px;
+  }
+  .search-section {
+    padding: 20px;
+  }
+  .search-field {
+    max-width: 100%;
+  }
+  .department-accordion {
+    gap: 12px;
+  }
+  .department-content {
+    padding: 16px;
+  }
+  .employee-table th,
+  .employee-table td {
+    padding: 8px 12px;
+  }
+  .department-actions {
+    flex-direction: column;
+  }
+  .action-btn {
+    width: 100%;
+  }
+}
+ 

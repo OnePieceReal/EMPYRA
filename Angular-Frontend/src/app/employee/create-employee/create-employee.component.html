@@ -1,0 +1,321 @@
+<div class="form-container" [@fadeIn]>
+  <div class="form-card">
+    <div class="form-header">
+      <mat-icon class="header-icon">person_add</mat-icon>
+      <h2 class="form-title">Add New Employee</h2>
+      <p class="form-subtitle">Enter the employee details below</p>
+    </div>
+
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form">
+      
+      <!-- Personal Information Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <mat-icon class="section-icon">person</mat-icon>
+          <h3 class="section-title">Personal Information</h3>
+        </div>
+        <div class="section-content">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" placeholder="Enter first name">
+          <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="firstName?.hasError('required')">
+            First name is required
+          </mat-error>
+              <mat-error *ngIf="firstName?.hasError('minlength')">
+                First name must be at least 2 characters
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Enter last name">
+          <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="lastName?.hasError('required')">
+            Last name is required
+          </mat-error>
+              <mat-error *ngIf="lastName?.hasError('minlength')">
+                Last name must be at least 2 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Email Address</mat-label>
+          <input matInput formControlName="emailId" type="email" placeholder="Enter email address">
+          <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="emailId?.hasError('required')">
+            Email is required
+          </mat-error>
+              <mat-error *ngIf="emailId?.hasError('email')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailId?.hasError('emailExists') || emailExistsError">
+            This email is already used by another employee.
+          </mat-error>
+        </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phone" type="tel" placeholder="Enter phone number">
+              <mat-icon matSuffix>phone</mat-icon>
+              <mat-error *ngIf="phone?.hasError('required')">
+                Phone number is required
+              </mat-error>
+              <mat-error *ngIf="phone?.hasError('pattern')">
+                Please enter a valid 10-digit phone number
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput formControlName="dob" type="date" placeholder="Enter date of birth">
+              <mat-icon matSuffix>cake</mat-icon>
+              <mat-error *ngIf="dob?.hasError('required')">
+                Date of birth is required
+              </mat-error>
+              <mat-error *ngIf="dob?.hasError('underage')">
+                Employee must be at least 18 years old
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <!-- Location Information Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <mat-icon class="section-icon">location_on</mat-icon>
+          <h3 class="section-title">Location Information</h3>
+        </div>
+        <div class="section-content">
+          <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>City</mat-label>
+              <input matInput formControlName="city" placeholder="Enter city" 
+                     [matAutocomplete]="cityAuto">
+          <mat-icon matSuffix>location_city</mat-icon>
+              <mat-autocomplete #cityAuto="matAutocomplete" 
+                               (optionSelected)="selectCity($event.option.value)">
+                <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+                  <div class="location-option">
+                    <mat-icon class="location-icon">location_city</mat-icon>
+                    <span class="location-name">{{ city.name }}</span>
+                    <span class="location-state">{{ city.state }}</span>
+                  </div>
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="city?.hasError('required')">
+            City is required
+          </mat-error>
+              <mat-error *ngIf="city?.hasError('minlength')">
+                City must be at least 2 characters
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>State</mat-label>
+              <input matInput formControlName="state" placeholder="Enter state" 
+                     [matAutocomplete]="stateAuto">
+              <mat-icon matSuffix>location_on</mat-icon>
+              <mat-autocomplete #stateAuto="matAutocomplete" 
+                               (optionSelected)="selectState($event.option.value)">
+                <mat-option *ngFor="let state of filteredStates | async" [value]="state">
+                  <div class="location-option">
+                    <mat-icon class="location-icon">location_on</mat-icon>
+                    <span class="location-name">{{ state.name }}</span>
+                    <span class="location-abbr">({{ state.abbreviation }})</span>
+                  </div>
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="state?.hasError('required')">
+                State is required
+              </mat-error>
+              <mat-error *ngIf="state?.hasError('minlength')">
+                State must be at least 2 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Country</mat-label>
+              <input matInput formControlName="country" placeholder="Enter country" 
+                     [matAutocomplete]="countryAuto">
+              <mat-icon matSuffix>public</mat-icon>
+              <mat-autocomplete #countryAuto="matAutocomplete" 
+                               (optionSelected)="selectCountry($event.option.value)">
+                <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
+                  <div class="location-option">
+                    <img [src]="country.flags.png" [alt]="country.flags.alt" class="country-flag">
+                    <span class="location-name">{{ country.name.common }}</span>
+                  </div>
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="country?.hasError('required')">
+                Country is required
+              </mat-error>
+              <mat-error *ngIf="country?.hasError('minlength')">
+                Country must be at least 2 characters
+              </mat-error>
+        </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <!-- Employment Information Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <mat-icon class="section-icon">work</mat-icon>
+          <h3 class="section-title">Employment Information</h3>
+        </div>
+        <div class="section-content">
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Date of Joining</mat-label>
+              <input matInput formControlName="dateOfJoining" type="date" placeholder="Enter date of joining">
+              <mat-icon matSuffix>work</mat-icon>
+              <mat-error *ngIf="dateOfJoining?.hasError('required')">
+                Date of joining is required
+              </mat-error>
+              <mat-error *ngIf="dateOfJoining?.hasError('futureDate')">
+                Date of joining cannot be in the future
+        </mat-error>
+              <mat-error *ngIf="dateOfJoining?.hasError('beforeDob')">
+                Date of joining must be after date of birth
+        </mat-error>
+      </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Salary</mat-label>
+              <input matInput formControlName="salary" type="number" placeholder="Enter salary">
+              <mat-icon matSuffix>attach_money</mat-icon>
+              <mat-error *ngIf="salary?.hasError('required')">
+                Salary is required
+              </mat-error>
+              <mat-error *ngIf="salary?.hasError('min')">
+                Salary must be greater than 0
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Rating (1-10)</mat-label>
+              <input matInput formControlName="rating" type="number" min="1" max="10" placeholder="Enter rating">
+              <mat-icon matSuffix>star</mat-icon>
+              <mat-error *ngIf="rating?.hasError('required')">
+                Rating is required
+              </mat-error>
+              <mat-error *ngIf="rating?.hasError('min') || rating?.hasError('max')">
+                Rating must be between 1 and 10
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hobbies Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <mat-icon class="section-icon">sports_esports</mat-icon>
+          <h3 class="section-title">Hobbies & Interests</h3>
+        </div>
+        <div class="section-content">
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Search and Add Hobbies</mat-label>
+              <input matInput formControlName="hobbySearch" placeholder="Type to search hobbies...">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <!-- Hobby Suggestions -->
+          <div class="hobby-suggestions" *ngIf="hobbySearch?.value">
+            <mat-card class="suggestion-card" *ngFor="let hobby of filteredHobbies | async" 
+                      (click)="addHobby(hobby)">
+              <mat-card-content>
+                <div class="hobby-suggestion">
+                  <mat-icon class="hobby-icon">sports_esports</mat-icon>
+                  <span class="hobby-name">{{ hobby.name }}</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!-- Selected Hobbies -->
+          <div class="selected-hobbies" *ngIf="selectedHobbies.length > 0">
+            <h4 class="selected-title">Selected Hobbies:</h4>
+            <div class="hobby-chips">
+              <mat-chip *ngFor="let hobby of selectedHobbies" 
+                        (removed)="removeHobby(hobby)" 
+                        class="hobby-chip">
+                {{ hobby.name }}
+                <mat-icon matChipRemove class="remove-icon">cancel</mat-icon>
+              </mat-chip>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Departments Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <mat-icon class="section-icon">business</mat-icon>
+          <h3 class="section-title">Departments</h3>
+        </div>
+        <div class="section-content">
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Search and Add Departments</mat-label>
+              <input matInput formControlName="departmentSearch" placeholder="Type to search departments...">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <!-- Department Suggestions -->
+          <div class="department-suggestions" *ngIf="departmentSearch?.value">
+            <mat-card class="suggestion-card" *ngFor="let department of filteredDepartments | async" 
+                      (click)="addDepartment(department)">
+              <mat-card-content>
+                <div class="department-suggestion">
+                  <mat-icon class="department-icon">business</mat-icon>
+                  <span class="department-name">{{ department.name }}</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!-- Selected Departments -->
+          <div class="selected-departments" *ngIf="selectedDepartments.length > 0">
+            <h4 class="selected-title">Selected Departments:</h4>
+            <div class="department-chips">
+              <mat-chip *ngFor="let department of selectedDepartments" 
+                        (removed)="removeDepartment(department)" 
+                        class="department-chip">
+                {{ department.name }}
+                <mat-icon matChipRemove class="remove-icon">cancel</mat-icon>
+              </mat-chip>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button mat-button type="button" routerLink="/employees" class="cancel-btn">
+          <mat-icon>arrow_back</mat-icon>
+          Cancel
+        </button>
+        <button mat-raised-button color="primary" type="submit" 
+                [disabled]="employeeForm.invalid || loading" class="submit-btn">
+          <mat-icon>save</mat-icon>
+          {{ loading ? 'Creating...' : 'Create Employee' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div> 

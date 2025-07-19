@@ -1,0 +1,156 @@
+<div class="department-management-container">
+  <!-- Header Section -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-title">
+        <h1>Department Management</h1>
+        <p>Manage and organize company departments</p>
+      </div>
+      <div class="header-actions">
+        <button mat-raised-button color="primary" (click)="addDepartment()" class="add-button">
+          <mat-icon>add</mat-icon>
+          Add Department
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section left-align">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search departments</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" placeholder="Search by name, ID, or description">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="department-accordion" *ngIf="!loading">
+    <mat-expansion-panel *ngFor="let dept of filteredDepartments" class="department-panel">
+      <mat-expansion-panel-header class="department-header">
+        <mat-panel-title class="department-title">
+          <span class="department-id">{{ dept.id }}</span>
+          <span class="department-name">{{ dept.name }}</span>
+        </mat-panel-title>
+        <mat-panel-description class="department-description">
+          {{ dept.employees.length || 0 }} employees
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="department-content">
+        <div class="department-info-section">
+          <h4>Department Information</h4>
+          <div class="info-grid">
+            <div class="info-item">
+              <strong>ID:</strong> {{ dept.id }}
+            </div>
+            <div class="info-item">
+              <strong>Name:</strong> {{ dept.name }}
+            </div>
+            <div class="info-item full-width">
+              <strong>Description:</strong> {{ dept.description }}
+            </div>
+          </div>
+        </div>
+
+        <div class="employees-section">
+          <h4>Employees ({{ dept.employees.length || 0 }})</h4>
+
+          <!-- Add Employee Section: moved here -->
+        <div class="add-employee-section">
+          <h4>Add or Remove Employee from Department</h4>
+          <div class="add-by-search-row">
+            <mat-form-field appearance="outline" class="add-employee-search-field">
+              <mat-label>Add or Remove Employee</mat-label>
+              <input matInput [(ngModel)]="employeeSearch[dept.id]" (ngModelChange)="onEmployeeSearchChange(dept.id)" name="searchEmp{{dept.id}}" placeholder="Add or Remove Employee from Department">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <div class="employee-search-results" *ngIf="employeeSearchResults[dept.id]?.length">
+              <div class="employee-search-result" *ngFor="let emp of employeeSearchResults[dept.id]">
+                <span>{{ emp.firstName }} {{ emp.lastName }} (ID: {{ emp.id }})</span>
+                <ng-container *ngIf="isEmployeeInDepartment(dept, emp.id); else addBtn">
+                  <button mat-stroked-button color="warn" (click)="removeEmployeeFromDepartment(emp.id, dept.id)" [disabled]="removingEmployee[dept.id] === emp.id">
+                    <mat-icon>delete</mat-icon>
+                    Remove
+                  </button>
+                </ng-container>
+                <ng-template #addBtn>
+                  <button mat-stroked-button color="primary" (click)="addEmployeeToDepartment(dept.id, emp.id)" [disabled]="addingEmployee[dept.id]">
+                    <mat-icon>person_add</mat-icon>
+                    Add
+                  </button>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <div *ngIf="dept.employees && dept.employees.length > 0">
+            <table mat-table [dataSource]="dept.employees" class="employee-table">
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let employee">{{ employee.id }}</td>
+              </ng-container>
+
+              <!-- First Name Column -->
+              <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef>First Name</th>
+                <td mat-cell *matCellDef="let employee">{{ employee.firstName }}</td>
+              </ng-container>
+
+              <!-- Last Name Column -->
+              <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef>Last Name</th>
+                <td mat-cell *matCellDef="let employee">{{ employee.lastName }}</td>
+              </ng-container>
+
+              <!-- Actions Column -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let employee">
+                  <button mat-icon-button color="warn" 
+                          (click)="removeEmployeeFromDepartment(employee.id, dept.id)"
+                          matTooltip="Remove from department">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <div *ngIf="!dept.employees || dept.employees.length === 0" class="no-employees">
+            <em>No employees in this department.</em>
+          </div>
+        </div>
+
+        <div class="department-actions">
+          <button mat-raised-button color="primary" (click)="editDepartment(dept)" class="action-btn">
+            <mat-icon>edit</mat-icon>
+            Edit Department
+          </button>
+          <button mat-raised-button color="warn" (click)="deleteDepartment(dept)" class="action-btn">
+            <mat-icon>delete</mat-icon>
+            Delete Department
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+  <div *ngIf="loading" class="loading-state">
+    <mat-spinner diameter="40"></mat-spinner>
+    <span>Loading departments...</span>
+  </div>
+
+  <div *ngIf="!loading && filteredDepartments.length === 0 && searchTerm" class="no-results">
+    <mat-icon>search_off</mat-icon>
+    <span>No departments found matching "{{ searchTerm }}"</span>
+  </div>
+
+  <button mat-fab color="primary" class="fab-add" (click)="addDepartment()" matTooltip="Add Department">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+ 

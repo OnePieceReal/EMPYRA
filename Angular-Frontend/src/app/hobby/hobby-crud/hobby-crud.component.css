@@ -1,0 +1,536 @@
+.hobby-management-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Header Section */
+.page-header {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.header-title h1 {
+  margin: 0 0 8px 0;
+  color: #2c3e50;
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-title p {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.add-button {
+  height: 56px;
+  padding: 0 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.add-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+}
+
+.add-button mat-icon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+/* Search Section */
+.search-section {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.search-field {
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-field ::ng-deep .mat-form-field-outline {
+  border-radius: 12px;
+}
+
+/* Content Section */
+.content-section {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  min-height: 400px;
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  color: #7f8c8d;
+}
+
+.loading-container p {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Hobby Grid */
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
+}
+
+/* Hobby Cards */
+.hobby-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+
+.hobby-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 24px 24px 16px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.hobby-icon {
+  background: rgba(255,255,255,0.2);
+  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.hobby-icon mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+.hobby-info {
+  flex: 1;
+}
+
+.hobby-name {
+  margin: 0 0 4px 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.2;
+}
+
+.hobby-id {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.1);
+  padding: 4px 12px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* Card Content */
+.card-content {
+  padding: 20px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hobby-description {
+  color: #2c3e50;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card Actions */
+.card-actions {
+  padding: 20px 24px 24px 24px;
+  display: flex;
+  gap: 12px;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+.action-button {
+  flex: 1;
+  height: 48px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.edit-button {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border: none;
+}
+
+.edit-button:hover {
+  background: linear-gradient(135deg, #43a3f5 0%, #00e5f2 100%);
+}
+
+.delete-button {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  border: none;
+}
+
+.delete-button:hover {
+  background: linear-gradient(135deg, #ff5252 0%, #e53935 100%);
+}
+
+.action-button mat-icon {
+  margin-right: 6px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 80px;
+  width: 80px;
+  height: 80px;
+  color: #bdc3c7;
+  margin-bottom: 32px;
+  opacity: 0.6;
+}
+
+.empty-state h3 {
+  margin: 0 0 16px 0;
+  color: #2c3e50;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.empty-state p {
+  margin: 0 0 40px 0;
+  color: #7f8c8d;
+  font-size: 18px;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.empty-state button {
+  height: 56px;
+  padding: 0 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.empty-state button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+}
+
+.empty-state button mat-icon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .hobby-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .hobby-management-container {
+    padding: 16px;
+  }
+  
+  .page-header {
+    padding: 24px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .header-title h1 {
+    font-size: 28px;
+  }
+  
+  .header-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-section {
+    padding: 20px;
+  }
+  
+  .content-section {
+    padding: 24px;
+  }
+  
+  .hobby-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .hobby-card {
+    min-height: 260px;
+  }
+  
+  .card-header {
+    padding: 20px 20px 12px 20px;
+  }
+  
+  .hobby-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .hobby-icon mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .hobby-name {
+    font-size: 20px;
+  }
+  
+  .card-content {
+    padding: 16px 20px;
+  }
+  
+  .card-actions {
+    padding: 16px 20px 20px 20px;
+  }
+  
+  .action-button {
+    height: 44px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hobby-management-container {
+    padding: 12px;
+  }
+  
+  .page-header {
+    padding: 20px;
+  }
+  
+  .header-title h1 {
+    font-size: 24px;
+  }
+  
+  .header-title p {
+    font-size: 16px;
+  }
+  
+  .add-button {
+    height: 48px;
+    padding: 0 24px;
+    font-size: 14px;
+  }
+  
+  .search-section {
+    padding: 16px;
+  }
+  
+  .content-section {
+    padding: 20px;
+  }
+  
+  .hobby-card {
+    min-height: 240px;
+  }
+  
+  .card-header {
+    padding: 16px 16px 12px 16px;
+  }
+  
+  .hobby-icon {
+    width: 44px;
+    height: 44px;
+    margin-right: 12px;
+  }
+  
+  .hobby-icon mat-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+  
+  .hobby-name {
+    font-size: 18px;
+  }
+  
+  .hobby-id {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+  
+  .card-content {
+    padding: 12px 16px;
+  }
+  
+  .hobby-description {
+    font-size: 14px;
+  }
+  
+  .card-actions {
+    padding: 12px 16px 16px 16px;
+    gap: 8px;
+  }
+  
+  .action-button {
+    height: 40px;
+    font-size: 12px;
+  }
+  
+  .action-button mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+  }
+}
+
+/* Floating Action Button */
+.fab-add {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  border: none;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.fab-add:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.6);
+}
+
+.fab-add mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+/* Responsive FAB */
+@media (max-width: 768px) {
+  .fab-add {
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+  }
+  
+  .fab-add mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fab-add {
+    bottom: 16px;
+    right: 16px;
+    width: 52px;
+    height: 52px;
+  }
+  
+  .fab-add mat-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+} 

@@ -1,0 +1,159 @@
+<div class="employee-list-container" [@fadeIn]>
+  <!-- Header Section -->
+  <div class="page-header" [@slideInDown]>
+    <div class="header-content">
+      <div class="header-left">
+        <h1 class="page-title">
+          <mat-icon class="title-icon">people</mat-icon>
+          Employee Directory
+        </h1>
+        <p class="page-subtitle">Manage your team members efficiently</p>
+      </div>
+      <div class="header-right">
+        <button mat-icon-button color="primary" (click)="refreshData()" 
+                matTooltip="Refresh employee list" class="refresh-btn" [disabled]="loading">
+          <mat-icon *ngIf="!loading">refresh</mat-icon>
+          <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section" [@slideInDown]>
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search employees</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Search by name, email, location, phone, salary, rating, hobbies, or departments...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <!-- Employee Cards Grid -->
+  <div class="employee-grid" [@staggerAnimation]="employees.length">
+    <mat-card class="employee-card" *ngFor="let employee of filteredEmployees; trackBy: trackByEmployeeId" 
+              [@cardAnimation] [@hoverAnimation]="'normal'">
+      <mat-card-header>
+        <div mat-card-avatar class="employee-avatar">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="employee-header-info">
+        <mat-card-title class="employee-name">{{employee.firstName}} {{employee.lastName}}</mat-card-title>
+        <mat-card-subtitle class="employee-id">Employee ID: {{employee.id}}</mat-card-subtitle>
+          <div class="rating-display">
+            <mat-icon *ngFor="let star of [1,2,3,4,5,6,7,8,9,10]" 
+                      [class.filled-star]="star <= employee.rating" 
+                      [class.empty-star]="star > employee.rating">
+              {{star <= employee.rating ? 'star' : 'star_border'}}
+            </mat-icon>
+            <span class="rating-text">({{employee.rating}}/10)</span>
+          </div>
+        </div>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="employee-info">
+          <div class="info-item">
+            <mat-icon class="info-icon">email</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Email</span>
+              <span class="info-text">{{employee.emailId}}</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon class="info-icon">location_city</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Location</span>
+              <span class="info-text">{{employee.city}}, {{employee.state}}, {{employee.country}}</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon class="info-icon">phone</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Phone</span>
+              <span class="info-text">{{formatPhone(employee.phone)}}</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon class="info-icon">cake</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Age</span>
+              <span class="info-text">{{getAge(employee.dob)}} years ({{formatDate(employee.dob)}})</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon class="info-icon">work</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Years of Service</span>
+              <span class="info-text">{{getYearsOfService(employee.dateOfJoining)}} years ({{formatDate(employee.dateOfJoining)}})</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon class="info-icon">attach_money</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Salary</span>
+              <span class="info-text">{{formatSalary(employee.salary)}}</span>
+            </div>
+          </div>
+          <div class="info-item" *ngIf="employee.employeeHobbies && employee.employeeHobbies.length > 0">
+            <mat-icon class="info-icon">sports_esports</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Hobbies</span>
+              <div class="hobbies-list">
+                <span class="hobby-tag" *ngFor="let hobbyMap of employee.employeeHobbies">
+                  {{hobbyMap.hobby.name}}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="info-item" *ngIf="employee.employeeDepartments && employee.employeeDepartments.length > 0">
+            <mat-icon class="info-icon">business</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Departments</span>
+              <div class="departments-list">
+                <span class="department-tag" *ngFor="let deptMap of employee.employeeDepartments">
+                  {{deptMap.department.name}}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+      
+      <mat-card-actions class="card-actions">
+        <button mat-raised-button color="primary" (click)="updateEmployee(employee.id)" 
+                class="action-btn update-btn" [@buttonHover]="'normal'">
+          <mat-icon>edit</mat-icon>
+          Update
+        </button>
+        <button mat-raised-button color="warn" (click)="deleteEmployee(employee.id)" 
+                class="action-btn delete-btn" [@buttonHover]="'normal'">
+          <mat-icon>delete</mat-icon>
+          Delete
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="filteredEmployees.length === 0" [@fadeInUp]>
+    <mat-icon class="empty-icon">people_outline</mat-icon>
+    <h3>No employees found</h3>
+    <p>{{searchTerm ? 'Try adjusting your search terms' : 'Get started by adding your first employee'}}</p>
+    <button mat-raised-button color="primary" routerLink="create-employee" *ngIf="!searchTerm">
+      <mat-icon>add</mat-icon>
+      Add First Employee
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading" [@fadeIn]>
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading employees...</p>
+  </div>
+
+  <!-- Floating Action Button for Add Employee -->
+  <button mat-fab color="primary" class="fab-add" routerLink="/create-employee" 
+          matTooltip="Add New Employee" [@fabAnimation]>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,97 @@
+<div class="app-container">
+  <!-- Modern Header -->
+  <mat-toolbar color="primary" class="app-header">
+    <button mat-icon-button (click)="sidenav.toggle()" class="menu-toggle">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="app-title">
+      <img src="assets/empyra.jpg" alt="EMPYRA Logo" class="app-logo">
+      <span class="app-name">EMPYRA</span>
+    </span>
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <!-- Sidebar Navigation -->
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="app-sidenav" [@slideInOut]>
+      <div class="sidenav-header">
+        <div class="brand-info">
+          <img src="assets/empyra.jpg" alt="EMPYRA Logo" class="brand-logo">
+          <div class="brand-details">
+            <div class="brand-name">EMPYRA</div>
+            <div class="brand-tagline">Employee Management</div>
+          </div>
+        </div>
+        <div class="user-info">
+          <mat-icon class="user-avatar">account_circle</mat-icon>
+          <div class="user-details">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Administrator</div>
+          </div>
+        </div>
+      </div>
+      
+      <mat-nav-list class="nav-list">
+        <a mat-list-item routerLink="employees" routerLinkActive="active" 
+           class="nav-item" [@fadeInUp]>
+          <mat-icon matListItemIcon>list</mat-icon>
+          <span matListItemTitle>Employee List</span>
+        </a>
+        <a mat-list-item routerLink="create-employee" routerLinkActive="active" 
+           class="nav-item" [@fadeInUp]>
+          <mat-icon matListItemIcon>person_add</mat-icon>
+          <span matListItemTitle>Add Employee</span>
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item routerLink="hobbies" routerLinkActive="active" 
+           class="nav-item" [@fadeInUp]>
+          <mat-icon matListItemIcon>sports_esports</mat-icon>
+          <span matListItemTitle>Hobby MNGMT</span>
+        </a>
+        <a mat-list-item routerLink="departments" routerLinkActive="active" 
+           class="nav-item" [@fadeInUp]>
+          <mat-icon matListItemIcon>apartment</mat-icon>
+          <span matListItemTitle>Department MNGMT</span>
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item routerLink="analytics" routerLinkActive="active" 
+           class="nav-item" [@fadeInUp]>
+          <mat-icon matListItemIcon>analytics</mat-icon>
+          <span matListItemTitle>Analytics</span>
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item routerLink="settings" routerLinkActive="active" 
+           class="nav-item" [@fadeInUp]>
+          <mat-icon matListItemIcon>settings</mat-icon>
+          <span matListItemTitle>Settings</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Main Content Area -->
+    <mat-sidenav-content class="main-content" [@fadeIn]>
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+      </mat-sidenav-content>
+</mat-sidenav-container>
+</div>
+

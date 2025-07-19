@@ -1,0 +1,42 @@
+<div class="department-form-dialog">
+  <h2>{{ dialogTitle }}</h2>
+  <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()" class="department-form">
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Department Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter department name">
+      <mat-error *ngIf="departmentForm.get('name')?.hasError('required')">
+        Name is required
+      </mat-error>
+      <mat-error *ngIf="departmentForm.get('name')?.hasError('minlength')">
+        Name must be at least 2 characters
+      </mat-error>
+      <mat-error *ngIf="departmentForm.get('name')?.hasError('maxlength')">
+        Name must be less than 50 characters
+      </mat-error>
+      <mat-error *ngIf="departmentForm.get('name')?.hasError('nameExists') || nameExistsError">
+        A department with this name already exists.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="Enter department description" rows="3"></textarea>
+      <mat-error *ngIf="departmentForm.get('description')?.hasError('required')">
+        Description is required
+      </mat-error>
+      <mat-error *ngIf="departmentForm.get('description')?.hasError('minlength')">
+        Description must be at least 5 characters
+      </mat-error>
+      <mat-error *ngIf="departmentForm.get('description')?.hasError('maxlength')">
+        Description must be less than 200 characters
+      </mat-error>
+    </mat-form-field>
+
+    <div class="dialog-actions">
+      <button mat-button type="button" (click)="onCancel()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="departmentForm.invalid">
+        {{ isEditMode ? 'Update' : 'Create' }}
+      </button>
+    </div>
+  </form>
+</div> 

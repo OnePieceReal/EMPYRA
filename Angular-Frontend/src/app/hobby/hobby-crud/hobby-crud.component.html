@@ -1,0 +1,84 @@
+<div class="hobby-management-container">
+  <!-- Header Section -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-title">
+        <h1>Hobby Management</h1>
+        <p>Manage and organize employee hobbies</p>
+      </div>
+      <div class="header-actions">
+        <button mat-raised-button color="primary" (click)="addHobby()" class="add-button">
+          <mat-icon>add</mat-icon>
+          Add New Hobby
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search hobbies</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Search by name, description, or ID">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="loading">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Loading hobbies...</p>
+    </div>
+
+    <!-- Hobby Cards Grid -->
+    <div class="hobby-grid" *ngIf="!loading">
+      <div class="hobby-card" *ngFor="let hobby of filteredHobbies; trackBy: trackByHobbyId">
+        <div class="card-header">
+          <div class="hobby-icon">
+            <mat-icon>sports_esports</mat-icon>
+          </div>
+          <div class="hobby-info">
+            <h3 class="hobby-name">{{ hobby.name }}</h3>
+            <span class="hobby-id">ID: {{ hobby.id }}</span>
+          </div>
+        </div>
+        
+        <div class="card-content">
+          <p class="hobby-description">{{ hobby.description }}</p>
+        </div>
+        
+        <div class="card-actions">
+          <button mat-raised-button color="primary" (click)="updateHobby(hobby)" class="action-button edit-button">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+          <button mat-raised-button color="warn" (click)="deleteHobby(hobby.id)" class="action-button delete-button">
+            <mat-icon>delete</mat-icon>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!loading && filteredHobbies.length === 0">
+      <mat-icon class="empty-icon">sports_esports</mat-icon>
+      <h3>No hobbies found</h3>
+      <p>{{ searchTerm ? 'Try adjusting your search criteria' : 'Get started by adding your first hobby' }}</p>
+      <button mat-raised-button color="primary" (click)="addHobby()" *ngIf="!searchTerm">
+        <mat-icon>add</mat-icon>
+        Add First Hobby
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating Action Button -->
+  <button mat-fab color="primary" class="fab-add" (click)="addHobby()" 
+          [@fabAnimation]="fabState" 
+          (mouseenter)="fabState = 'hover'" 
+          (mouseleave)="fabState = 'normal'">
+    <mat-icon>add</mat-icon>
+  </button>
+</div> 

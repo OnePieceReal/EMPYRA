@@ -1,0 +1,66 @@
+<div class="hobby-form-dialog">
+  <!-- Dialog Header -->
+  <div class="dialog-header">
+    <h2 mat-dialog-title>{{ dialogTitle }}</h2>
+    <button mat-icon-button (click)="onCancel()" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Dialog Content -->
+  <mat-dialog-content class="dialog-content">
+    <form [formGroup]="hobbyForm" (ngSubmit)="onSubmit()" class="hobby-form">
+      <!-- Hobby Name Field -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Hobby Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter hobby name">
+        <mat-icon matSuffix>sports_esports</mat-icon>
+        <mat-error *ngIf="name?.hasError('required')">
+          Hobby name is required
+        </mat-error>
+        <mat-error *ngIf="name?.hasError('minlength')">
+          Hobby name must be at least 2 characters
+        </mat-error>
+        <mat-error *ngIf="name?.hasError('maxlength')">
+          Hobby name must be less than 50 characters
+        </mat-error>
+        <mat-error *ngIf="name?.hasError('nameExists') || nameExistsError">
+          A hobby with this name already exists.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Description Field -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" 
+                  placeholder="Enter hobby description" 
+                  rows="4"></textarea>
+        <mat-icon matSuffix>description</mat-icon>
+        <mat-error *ngIf="description?.hasError('required')">
+          Description is required
+        </mat-error>
+        <mat-error *ngIf="description?.hasError('minlength')">
+          Description must be at least 10 characters
+        </mat-error>
+        <mat-error *ngIf="description?.hasError('maxlength')">
+          Description must be less than 500 characters
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <!-- Dialog Actions -->
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-button (click)="onCancel()" [disabled]="loading">
+      Cancel
+    </button>
+    <button mat-raised-button 
+            color="primary" 
+            (click)="onSubmit()" 
+            [disabled]="hobbyForm.invalid || loading"
+            class="submit-button">
+      <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+      <span *ngIf="!loading">{{ isEditMode ? 'Update' : 'Create' }}</span>
+    </button>
+  </mat-dialog-actions>
+</div> 
