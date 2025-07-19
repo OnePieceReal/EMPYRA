@@ -1,7 +1,8 @@
 # EMPYRA - Employee Management System
 
-![EMPYRA Logo](Preview/empyra_logo.jpg)
-
+<p align="center">
+  <img src="Preview/empyra_logo.jpg" alt="EMPYRA Logo" width="300"/>
+</p>
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -20,10 +21,7 @@ The analytics module takes this a step further by feeding the visualized data to
 
 ## Demo
 
-
-
-https://github.com/user-attachments/assets/07a2af0f-962c-49a8-91d5-20abc10bd39e
-
+[![Watch the demo](https://github.com/user-attachments/assets/07a2af0f-962c-49a8-91d5-20abc10bd39e)](https://github.com/user-attachments/assets/07a2af0f-962c-49a8-91d5-20abc10bd39e)
 
 ## Features
 
@@ -34,74 +32,70 @@ https://github.com/user-attachments/assets/07a2af0f-962c-49a8-91d5-20abc10bd39e
 - **Responsive Dashboard**: Interactive charts and data visualizations
 - **Secure API Integration**: Robust Spring Boot backend with documented REST endpoints
 
+## Preview
 
 ### Employee Management
-![Employee List](./Preview/empyra_employeelist.jpg)
-*Figure 1: Employee List View*
+<p align="center">
+  <img src="./Preview/empyra_employeelist.jpg" alt="Employee List" width="700"/><br/>
+  <em>Figure 1: Employee List View</em>
+</p>
 
-![Add Employee](./Preview/empyra_addemployee.jpg)
-*Figure 2: Employee Creation Form*
+<p align="center">
+  <img src="./Preview/empyra_addemployee.jpg" alt="Add Employee" width="700"/><br/>
+  <em>Figure 2: Employee Creation Form</em>
+</p>
 
 ### Department Management
-![Department View](./Preview/empyra_department.jpg)
-*Figure 3: Department Management*
+<p align="center">
+  <img src="./Preview/empyra_department.jpg" alt="Department View" width="700"/><br/>
+  <em>Figure 3: Department Management</em>
+</p>
 
 ### Analytics Dashboard
-![Analytics View 1](./Preview/empyra_analytics1.jpg)
-*Figure 4: Analytics Dashboard - Overview*
+<p align="center">
+  <img src="./Preview/empyra_analytics1.jpg" alt="Analytics View 1" width="700"/><br/>
+  <em>Figure 4: Analytics Dashboard - Overview</em>
+</p>
 
-![Analytics View 2](./Preview/empyra_analytics2.jpg)
-*Figure 5: Analytics Dashboard - Department Metrics*
+<p align="center">
+  <img src="./Preview/empyra_analytics2.jpg" alt="Analytics View 2" width="700"/><br/>
+  <em>Figure 5: Analytics Dashboard - Department Metrics</em>
+</p>
 
-![Analytics View 3](./Preview/empyra_analytics3.jpg)
-*Figure 6: Analytics Dashboard - Geographical Distribution*
+<p align="center">
+  <img src="./Preview/empyra_analytics3.jpg" alt="Analytics View 3" width="700"/><br/>
+  <em>Figure 6: Analytics Dashboard - Geographical Distribution</em>
+</p>
 
 ### Additional Features
-![Hobbies Management](./Preview/empyra_hobbies.jpg)
-*Figure 7: Employee Hobbies Management*
+<p align="center">
+  <img src="./Preview/empyra_hobbies.jpg" alt="Hobbies Management" width="700"/><br/>
+  <em>Figure 7: Employee Hobbies Management</em>
+</p>
 
 ## Setup Guide
 
 To set up EMPYRA locally, follow these steps:
 
 ### Prerequisites
+
 - Node.js (v16 or later)
 - Angular CLI
 - Java JDK (v11 or later)
 - Maven
 - MySQL
 
-### Backend Setup
+---
+
+### 🔧 Backend Setup (Spring Boot)
+
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/empyra.git
+git clone https://github.com/OnePieceReal/EMPYRA.git
 
-# Navigate to backend directory
-cd empyra/backend
+# Navigate to the backend directory
+cd EMPYRA/backend
 
 # Install dependencies
 mvn install
-
-# Configure MySQL in application.properties
-# spring.datasource.url=jdbc:mysql://localhost:3306/empyra
-# spring.datasource.username=yourusername
-# spring.datasource.password=yourpassword
-
-# Run the Spring Boot application
-mvn spring-boot:run
 ```
-### Frontend Setup
-# Navigate to frontend directory
-cd ../frontend
-
-# Install dependencies
-npm install
-
-# Configure API base URL in environment.ts
-# export const environment = {
-#   production: false,
-#   apiUrl: 'http://localhost:8080/api'
-# };
-
-# Run the Angular development server
-ng serve
