@@ -1,7 +1,7 @@
 # EMPYRA - Employee Management System
 
-![EMPYRA Logo](https://via.placeholder.com/150x50?text=EMPYRA) 
-*(Consider adding your actual logo here)*
+![EMPYRA Logo](Preview/empyra_logo.jpg)
+
 
 ## Table of Contents
 - [Project Overview](#project-overview)
