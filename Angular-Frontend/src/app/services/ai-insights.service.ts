@@ -47,7 +47,7 @@ export class AiInsightsService {
     });
 
     const requestBody = {
-      model: 'deepseek/deepseek-chat-v3-0324:free',
+      model: 'anthropic/claude-sonnet-4',
       messages: [
         {
           role: 'system',
