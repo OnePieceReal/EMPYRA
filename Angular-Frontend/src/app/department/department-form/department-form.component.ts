@@ -1,13 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Department } from '../../department';
+import { Department } from '../../models/department';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DepartmentService } from '../../department.service';
+import { DepartmentService } from '../../services/department.service';
 import { OnInit } from '@angular/core';
 
 @Component({

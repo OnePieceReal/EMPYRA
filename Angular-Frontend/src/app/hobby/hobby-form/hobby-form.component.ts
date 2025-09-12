@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Hobby } from '../../hobby';
-import { HobbyService } from '../../hobby.service';
+import { Hobby } from '../../models/hobby';
+import { HobbyService } from '../../services/hobby.service';
 
 @Component({
   selector: 'app-hobby-form',
@@ -41,8 +41,8 @@ export class HobbyFormComponent implements OnInit {
     }
     // Fetch all hobbies for name uniqueness check
     this.hobbyService.getHobbiesList().subscribe({
-      next: (hobbies) => { this.allHobbies = hobbies || []; },
-      error: (err) => { console.error('Failed to fetch hobbies:', err); }
+      next: (hobbies: Hobby[]) => { this.allHobbies = hobbies || []; },
+      error: (err: any) => { console.error('Failed to fetch hobbies:', err); }
     });
   }
   
@@ -67,24 +67,24 @@ export class HobbyFormComponent implements OnInit {
       
       if (this.isEditMode && this.data.hobby) {
         this.hobbyService.updateHobby(this.data.hobby.id, hobbyData).subscribe({
-          next: (updatedHobby) => {
+          next: (updatedHobby: Hobby) => {
             console.log('Hobby updated successfully:', updatedHobby);
             this.loading = false;
             this.dialogRef.close(true);
           },
-          error: (error) => {
+          error: (error: any) => {
             console.error('Error updating hobby:', error);
             this.loading = false;
           }
         });
       } else {
         this.hobbyService.createHobby(hobbyData).subscribe({
-          next: (newHobby) => {
+          next: (newHobby: Hobby) => {
             console.log('Hobby created successfully:', newHobby);
             this.loading = false;
             this.dialogRef.close(true);
           },
-          error: (error) => {
+          error: (error: any) => {
             console.error('Error creating hobby:', error);
             this.loading = false;
           }

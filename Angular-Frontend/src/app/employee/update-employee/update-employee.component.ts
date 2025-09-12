@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../../employee.service';
-import { HobbyService } from '../../hobby.service';
-import { DepartmentService } from '../../department.service';
+import { EmployeeService } from '../../services/employee.service';
+import { HobbyService } from '../../services/hobby.service';
+import { DepartmentService } from '../../services/department.service';
 import { LocationService, Country, State, City } from '../../services/location.service';
-import { Employee } from '../../employee';
-import { Hobby } from '../../hobby';
-import { Department } from '../../department';
+import { Employee } from '../../models/employee';
+import { Hobby } from '../../models/hobby';
+import { Department } from '../../models/department';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';

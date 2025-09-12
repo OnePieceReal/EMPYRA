@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Department } from '../../department';
-import { DepartmentService } from '../../department.service';
+import { Department } from '../../models/department';
+import { DepartmentService } from '../../services/department.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,8 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DepartmentFormComponent } from '../department-form/department-form.component';
-import { Employee } from '../../employee';
-import { EmployeeService } from '../../employee.service';
+import { Employee } from '../../models/employee';
+import { EmployeeService } from '../../services/employee.service';
 
 @Component({
   selector: 'app-department-crud',

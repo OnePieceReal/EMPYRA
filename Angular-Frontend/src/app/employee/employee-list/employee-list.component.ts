@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Employee } from '../../employee'
-import { EmployeeService } from '../../employee.service'
-import { DepartmentService } from '../../department.service'
-import { Department } from '../../department'
+import { Employee } from '../../models/employee'
+import { EmployeeService } from '../../services/employee.service'
+import { DepartmentService } from '../../services/department.service'
+import { Department } from '../../models/department'
 import { Router, NavigationEnd } from '@angular/router';
 import { trigger, state, style, transition, animate, query, stagger, keyframes } from '@angular/animations';
 import { filter, takeUntil } from 'rxjs/operators';

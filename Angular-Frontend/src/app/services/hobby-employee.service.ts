@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { Hobby } from './hobby';
-import { Employee } from './employee';
+import { Hobby } from '../models/hobby';
+import { Employee } from '../models/employee';
 import { HobbyService } from './hobby.service';
 import { EmployeeService } from './employee.service';
 

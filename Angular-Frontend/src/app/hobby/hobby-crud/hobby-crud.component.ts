@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Hobby } from '../../hobby';
-import { HobbyService } from '../../hobby.service';
+import { Hobby } from '../../models/hobby';
+import { HobbyService } from '../../services/hobby.service';
 import { HobbyFormComponent } from '../hobby-form/hobby-form.component';
 
 @Component({
@@ -39,12 +39,12 @@ export class HobbyCrudComponent implements OnInit {
   loadHobbies(): void {
     this.loading = true;
     this.hobbyService.getHobbiesList().subscribe({
-      next: (data) => {
+      next: (data: Hobby[]) => {
         this.hobbies = data;
         this.filteredHobbies = data;
         this.loading = false;
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error fetching hobbies:', error);
         this.loading = false;
       }
@@ -105,7 +105,7 @@ export class HobbyCrudComponent implements OnInit {
           console.log('Hobby deleted successfully');
           this.loadHobbies();
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('Error deleting hobby:', error);
         }
       });
