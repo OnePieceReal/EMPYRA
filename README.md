@@ -17,7 +17,7 @@ EMPYRA is a comprehensive Employee Management System built with Angular (using M
 
 To enhance user experience during employee data entry, EMPYRA integrates with the Restful Countries API, providing intelligent suggestions for country-related fields. The system also features advanced data visualization capabilities powered by Chart.js, presenting key metrics such as employee joining trends over time, department-wise average age and ratings, and geographical distribution of employees across cities, states, and countries.
 
-The analytics module takes this a step further by feeding the visualized data to the OpenRouter API, which accesses DeepSeek V3 0324 to generate actionable insights. These AI-powered insights include key findings, strategic recommendations, emerging trends, and potential opportunities specific to your organizational data.
+The analytics module takes this a step further by feeding the visualized data to the OpenRouter API, which accesses Claude Sonnet 4 to generate actionable insights. These AI-powered insights include key findings, strategic recommendations, emerging trends, and potential opportunities specific to your organizational data.
 
 ## Demo
 
